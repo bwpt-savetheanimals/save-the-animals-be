@@ -5,24 +5,20 @@ exports.up = function(knex) {
 	  tbl.increments();
 	  tbl.string('loc-name', 255).notNullable().unique();
   })
-  .createTable('roles', tbl => {
-		tbl.increments();
-		tbl.string('role-name', 128).notNullable();
-})
   .createTable('users', tbl => {
-	  tbl.increments();
-	  tbl.string('username', 128).notNullable().unique();
-	  tbl.string('password', 30).notNullable();
-	  tbl.integer('role-id', 128)
-	  .notNullable().unsigned()
-	  .references('id').inTable('roles')
-	  .onUpdate('CASCASE').onDelete('CASCASE');
+		tbl.increments();
+		tbl.string('username', 128).notNullable().unique();
+		tbl.string('password', 30).notNullable();
   })
 	.createTable('campaigns', tbl => {
 		tbl.increments();
+		tbl.integer('admin-user-id')
+			.notNullable().unsigned()
+			.references('id').inTable('users')
+			.onDelete('CASCADE').onUpdate('CASCASE');
 		tbl.string('cam-name', 128).notNullable().unique();
 		tbl.string('cam-description', 255);
-		tbl.integer('cam-location-id', 128)
+		tbl.integer('cam-location-id')
 			.notNullable().unsigned()
 			.references('id').inTable('locations')
 			.onDelete('CASCADE').onUpdate('CASCASE');
@@ -32,18 +28,23 @@ exports.up = function(knex) {
 		tbl.timestamps([useTimestamps], [defaultToNow])
   })
   .createTable('donations', tbl => {
-	  tbl.increments();
-	  tbl.integer('user-id')
+		tbl.increments();
+		tbl.integer('user-id')
 			.unsigned().notNullable()
 			.references('id').inTable('users')
 			.onDelete('CASCADE').onUpdate('CASCASE')
-	  tbl.integer('cam-id')
+		tbl.integer('cam-id')
 			.unsigned().notNullable()
 			.references('id').inTable('campaigns')
 			.onDelete('CASCADE').onUpdate('CASCADE')
+		tbl.integer('don-amount').unsigned().notNullable()
   })
 };
 
 exports.down = function(knex) {
-  
+  return knex.schema
+	.dropTableIfExists('donations')
+	.dropTableIfExists('campaigns')
+	.dropTableIfExists('users')
+	.dropTableIfExists('locations')
 };
