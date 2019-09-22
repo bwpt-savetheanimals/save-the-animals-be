@@ -13,4 +13,8 @@ server.use(express.json());
 
 //call routes
 
+server.get('/', (req, res) => {
+	res.send('<h2>Is it working?</h2>')
+})
+
 module.exports = server;
