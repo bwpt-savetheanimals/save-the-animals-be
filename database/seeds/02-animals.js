@@ -1,5 +1,5 @@
 
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
 	return knex('animals').insert([
 		{ 'ani_name': "Star-nosed Mole" }, 
 		{ 'ani_name': "Platypus" }, 

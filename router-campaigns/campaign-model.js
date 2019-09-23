@@ -9,17 +9,17 @@ module.exports = {
 }
 
 async function getAll() {
-	return db('campaigns')
-	.join('locations', 'locations.id', 'loc-id')
-	.select('id', 'cam-name', 'locations.loc-name', 'cam-urgency', 'cam-deadline', 'cam-goal-met')
+	return db('campaigns as c')
+	.join('locations as l', 'l.id', 'c.cam_location_id')
+	.select('c.id', 'cam_name', 'l.loc_name', 'cam_urgency', 'cam_deadline', 'cam_goal_met')
 }
 
 async function getById(id) {
 	return db('campaigns').where('id', req.params.id)
-	.join('locations', 'locations.id', 'loc-id')
-	.join('donations', 'donations.cam-id', 'id')
-	.join('users', 'donations.user-id', 'users.id')
-	.select('id', 'cam-name', 'cam-description', 'locations.loc-name', 'cam-urgency', 'cam-goal', 'cam-deadline', 'cam-goal-met', 'users.username', 'donations.don-amount')
+	.join('locations', 'locations.id', 'loc_id')
+	.join('donations', 'donations.cam_id', 'id')
+	.join('users', 'donations.user_id', 'users.id')
+	.select('id', 'cam_name', 'cam_description', 'locations.loc_name', 'cam_urgency', 'cam_goal', 'cam_deadline', 'cam_goal_met', 'users.username', 'donations.don_amount')
 }
 
 async function PostNew(campaign) { 
