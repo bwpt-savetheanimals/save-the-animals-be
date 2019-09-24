@@ -1,11 +1,9 @@
 const server = require('../api/server.js');
 const request = require('supertest');
-const cam = require('./campaign-model.js');
-const db = require('../database/dbConfig.js');
 
 describe('campaign router', () => {
 
-	describe('get to /', () => {
+	xdescribe('get to /', () => {
 		it('should return all campaigns', () => {
 			return request(server)
 			.get('/api/cams')
@@ -23,7 +21,7 @@ describe('campaign router', () => {
 		})
 	})
 
-	describe('get to /:id', () => {
+	xdescribe('get to /:id', () => {
 		it('should return status 200 with JSON object', ()=> {
 			return request(server)
 			.get('/api/cams/1')

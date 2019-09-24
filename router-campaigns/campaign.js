@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const CamDB = require('./campaign-model.js');
+const jwt = require('jsonwebtoken');
+const restricted = require('../auth/restricted.js')
 
 // GET to '/api/cams/'
 router.get('/', async (req, res) => {
