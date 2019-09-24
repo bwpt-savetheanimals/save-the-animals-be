@@ -22,4 +22,15 @@ describe('campaign router', () => {
 			})
 		})
 	})
+
+	describe('get to /:id', () => {
+		it('should return status 200 with JSON object', ()=> {
+			return request(server)
+			.get('/api/cams/1')
+			.then(res => {
+				expect(res.status).toBe(200);
+				expect(res.type).toBe('application/json')
+			})
+		})
+	})
 })

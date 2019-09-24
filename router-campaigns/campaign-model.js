@@ -3,6 +3,7 @@ const db = require('../database/dbConfig.js');
 module.exports = {
 	getAll,
 	getById,
+	getDonById,
 	PostNew,
 	PutById,
 	DeleteById
@@ -15,11 +16,15 @@ async function getAll() {
 }
 
 async function getById(id) {
-	return db('campaigns').where('id', req.params.id)
-	.join('locations', 'locations.id', 'loc_id')
-	.join('donations', 'donations.cam_id', 'id')
-	.join('users', 'donations.user_id', 'users.id')
-	.select('id', 'cam_name', 'cam_description', 'locations.loc_name', 'cam_urgency', 'cam_goal', 'cam_deadline', 'cam_goal_met', 'users.username', 'donations.don_amount')
+	return db('campaigns as c').where('c.id', id)
+	.join('locations as l', 'l.id', 'c.cam_location_id')
+	.select('c.id', 'c.cam_name', 'c.cam_description', 'l.loc_name', 'c.cam_urgency', 'c.cam_goal', 'c.cam_deadline', 'c.cam_goal_met').first()
+}
+
+async function getDonById(id) {
+	return db('donations as d').where('cam_id', id)
+	.join('users as u', 'd.user_id', 'u.id')
+	.select('u.username', 'd.don_amount')
 }
 
 async function PostNew(campaign) { 
