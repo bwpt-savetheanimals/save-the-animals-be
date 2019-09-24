@@ -11,25 +11,93 @@ backend repo for Save the Animals
 * [Contact](#contact)
 
 ## General info
-Add more general information about project. What the purpose of the project is? Motivation?
-
-## Screenshots
-![Example screenshot](./img/screenshot.png)
+the backend server for the save the animals website. A fake website to showoff our skills. Designed to be a crowdfunding website for animal conservation projects.
 
 ## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+bcrypt
+jwt
 
 ## Setup
-Describe how to install / setup your local environement / add link to demo version.
+runs locally off of node
 
 ## Features
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+
+* <GET> to '/api/cams' return list of all conservation campaigns
+
+{
+	campaigns: [
+		{id: 1,
+		cam_name: "Save the Sunda Pangolin",
+		loc_name: "Southeast Asia",
+		cam_urgency: "critical",
+		cam_deadline: "2022-02-20",
+		cam_goal_met: 0
+	}, {
+		id: 2,
+		cam_name: "Test 2",
+		loc_name: "Yellowstone National Park",
+		cam_urgency: "not",
+		cam_deadline: "2022-02-20",
+		cam_goal_met: 0
+	}]
+}
+
+* <GET> to '/api/cams/:id return a single campaign and applicable donations
+
+{
+	campaign: {
+		id: 1,
+		cam_name: "Save the Sunda Pangolin",
+		cam_description: "Highly valued for their scales and meat.",
+		loc_name: "Southeast Asia",
+		cam_urgency: "critical",
+		cam_goal: 100000,
+		cam_deadline: "2022-02-20",
+		cam_goal_met: 0
+	},
+	donations: [{
+		username: "Sunda",
+		don_amount: 10000
+		}, {
+		username: "Plat",
+		don_amount: 5000
+	}]
+}
+
+* <POST> to '/api/users/register' to register a new user. returns the new user with a webtoken.
+
+- send: 
+{
+	"username": "TestUser1",
+	"password": "TestPass"
+}
+
+- receives:
+
+{
+    "new_user": {
+        "id": 4,
+        "username": "TestUser1",
+        "password": "$2a$15$zCtLVZpBfMfyNhem05TCS.74IXemOInUVnKnoRsl48ovKFWQvP.n2"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsInVzZXJuYW1lIjoiVGVzdFVzZXIxIiwiaWF0IjoxNTY5Mjg5NDQxLCJleHAiOjE1NjkzMTgyNDF9.hK-7z8OnKQjI9SblfbGzu-H7O08L6JEbxr94mOlv4DI"
+}
+
+* <POST> to '/api/users/login' to login. return welcome message and a token
+
+- send:
+{
+	"username": "TestUser1",
+	"password": "TestPass"
+}
+
+- receive:
+{
+    "message": "welcome TestUser1",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsInVzZXJuYW1lIjoiVGVzdFVzZXIxIiwiaWF0IjoxNTY5Mjg5NzEyLCJleHAiOjE1NjkzMTg1MTJ9.5sZqeMC0c4XKZss8V3599KvRIa8bmswoqb8yK8skiNU"
+}
+
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* restricted routes
