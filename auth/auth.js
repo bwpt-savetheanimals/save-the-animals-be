@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const AuthDB = require('./auth-model.js');
-const restricted = require('./restricted.js')
+const restricted = require('./restricted.js');
 
 router.post('/register', async (req, res) => {
 	const userInfo  = req.body
