@@ -1,6 +1,9 @@
 {
   "name": "save-the-animals-be",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "description": "Backend for save the animals app",
   "main": "index.js",
   "scripts": {
