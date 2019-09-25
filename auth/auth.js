@@ -42,11 +42,9 @@ router.post('/login', async (req, res) => {
 router.get('/', restricted, async (req, res) => {
 	try {
 		const listAllUsers = await AuthDB.findAll();
-		console.log(listAllUsers);
 		
 		res.status(200).json({listAllUsers})
 	} catch(err) {
-		console.log(err);
 		
 		res.status(500).json({ error: "beep boop bop", err })
 	}
