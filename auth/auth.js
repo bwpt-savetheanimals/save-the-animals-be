@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const AuthDB = require('./auth-model.js');
 const restricted = require('./restricted.js');
 
@@ -42,9 +41,13 @@ router.post('/login', async (req, res) => {
 
 router.get('/', restricted, async (req, res) => {
 	try {
-		const allUsers = AuthDB.getAll();
-		res.status(200).json(allUsers)
+		const listAllUsers = await AuthDB.findAll();
+		console.log(listAllUsers);
+		
+		res.status(200).json({listAllUsers})
 	} catch(err) {
+		console.log(err);
+		
 		res.status(500).json({ error: "beep boop bop", err })
 	}
 })

@@ -2,7 +2,7 @@ const db = require('../database/dbConfig.js');
 
 module.exports = {
 	add,
-	getAll,
+	findAll,
 	getById,
 	getBy,
 	update,
@@ -23,8 +23,8 @@ function getBy(filter) {
 	return db('users').where(filter).first();
 }
 
-function getAll() {
-	return db('users');
+function findAll() {
+	return db('users')
 }
 
 function update(info) {
