@@ -6,7 +6,7 @@ const AuthDB = require('./auth-model.js');
 const restricted = require('./restricted.js');
 
 router.post('/register', async (req, res) => {
-	const userInfo  = req.body
+	const userInfo  = req.body;
 
 	try {
 		userInfo.password = bcrypt.hashSync(userInfo.password, 15);
