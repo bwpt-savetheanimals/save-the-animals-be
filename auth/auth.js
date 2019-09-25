@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const AuthDB = require('./auth-model.js');
 const restricted = require('./restricted.js');
 
@@ -13,11 +14,15 @@ router.post('/register', async (req, res) => {
 		const newUser = await AuthDB.add(userInfo)
 		const token = generateToken(newUser)
 
+		console.log(newUser);
+		
 		res.status(201).json({
 			new_user: newUser,
 			token
 		})
-	} catch(err) {		
+	} catch(err) {
+		console.log(err);
+				
 		res.status(500).json({ error: "something isnt working right", err })
 	}
 })
