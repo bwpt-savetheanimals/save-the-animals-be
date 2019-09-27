@@ -10,12 +10,12 @@ exports.seed = function(knex) {
 		cam_deadline: '2022-02-20',
 		cam_goal_met: false
 		},
-		{admin_user_id: 1,
-		cam_name: "Test 2",
-		cam_description: 'Things',
-		cam_location_id: 2,
-		cam_urgency: 'not',
-		cam_goal: 10,
+		{admin_user_id: 2,
+		cam_name: "Not the Rhinos!",
+		cam_description: 'Those horns though',
+		cam_location_id: 4,
+		cam_urgency: 'critial',
+		cam_goal: 10000,
 		cam_deadline: '2022-02-20',
 		cam_goal_met: false
 		}

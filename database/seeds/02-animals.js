@@ -8,7 +8,7 @@ exports.seed = function(knex) {
 		{ 'ani_name': "Blue-footed Booby" }, 
 		{ 'ani_name': "Anteater" }, 
 		{ 'ani_name': "Sunda pangolin" }, 
-		{ 'ani_name': "Raccoon" },
+		{ 'ani_name': "Rhinos" },
 		{ 'ani_name': 'Flamingo' },
 		{ 'ani_name': 'Kookaburra' }
   ]);
