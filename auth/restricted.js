@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 		jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
 
 			if(err) {
-				res.status(401).json({ message: "They climbing in your window. Snatching your people up. Hide your kids, hide your wide, hide your password."})
+				res.status(401).json({ message: "They climbing in your window. Snatching your people up. Hide your kids, hide your wife, hide your password."})
 			} else {
 				res.decodedToken = decodedToken;
 				next()

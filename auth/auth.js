@@ -9,14 +9,10 @@ router.post('/register', async (req, res) => {
 	const userInfo  = req.body;
 
 	try {
-		console.log(userInfo);
 		userInfo.password = bcrypt.hashSync(userInfo.password, 15);
 
 		const newUser = await AuthDB.add(userInfo)
 		const token = generateToken(newUser)
-
-		console.log(newUser);
-		console.log(token);
 		
 		res.status(201).json({
 			new_user: newUser,

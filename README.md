@@ -109,5 +109,41 @@ Some color-syntaxing enrichment can be applied with the following blockcode synt
 }
 ```
 
+## Need Auth token to use following
+
+### <POST> to '/api/cams/:id , need token, allows users to post a new donation and returns a list of donations for the respective campaign.
+
+- send:
+```javascript
+{
+	"Header": {
+		"authoization": token // as a string
+	}
+},{
+	"user_id": id, // as a integer
+	"cam_id": id, // as a integer
+	"don_amount": donation_amount // as a integer
+}
+```
+
+-receive:
+```javascript
+{
+	"donations": [
+		{
+			"username": "Sunda",
+			"don_amount": 10000
+		},
+		{
+			"username": "Plat",
+			"don_amount": 5000
+		},
+		{
+			"username": "Cham",
+			"don_amount": 5000
+		} // plus any additional donations made.
+	}
+}
+```
 To-do list:
 * restricted routes
